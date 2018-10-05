@@ -10,6 +10,16 @@ const updatingText = (state = '', action) => {
   }
 }
 
+const removingText = (state = '', action) => {
+  switch(action.type) {
+    case actionTypes.REMOVING_TEXT:
+      return state;
+    default:
+      return state;
+  }
+}
+
 export const mainReducer = combineReducers({
-    updatingText
+    updatingText,
+    removingText
 })
