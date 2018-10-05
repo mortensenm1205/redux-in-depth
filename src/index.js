@@ -7,7 +7,7 @@ import App from './App';
 export const store = createStore(mainReducer);
 const render = () => {
   ReactDOM.render(
-    <App values={store.getState().updatingText}/>,
+    <App values={store.getState().updatingText} store={store} />,
     document.getElementById('root')
   )
 };
