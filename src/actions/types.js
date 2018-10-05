@@ -1,0 +1,1 @@
+export const UPDATING_TEXT = "UPDATING_TEXT";
