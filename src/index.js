@@ -4,10 +4,10 @@ import { createStore } from 'redux';
 import { mainReducer } from './reducers';
 import App from './App';
 
-const store = createStore(mainReducer);
+export const store = createStore(mainReducer);
 const render = () => {
   ReactDOM.render(
-    <App storeToTest={store}/>,
+    <App values={store.getState().updatingText}/>,
     document.getElementById('root')
   )
 };
