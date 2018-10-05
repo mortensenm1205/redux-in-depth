@@ -1,5 +1,5 @@
-import * as actions from './types';
+import * as actionTypes from './types';
 
 export const actionUpdatingText = (text) => {
-  return {type: actions.UPDATING_TEXT, text}
+  return {type: actionTypes.UPDATING_TEXT, text}
 };
