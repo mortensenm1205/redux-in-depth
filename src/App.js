@@ -13,7 +13,7 @@ class App extends Component {
       this.setState({ displayText: e.target.value })
   }
 
-  handleClick = () => {
+  handleUpdate = () => {
       const { displayText } = this.state;
       const { store } = this.props;
       this.setState({ displayText: "" })
@@ -22,12 +22,14 @@ class App extends Component {
 
   render() {
     const { displayText } = this.state;
-    const { values } = this.props;
+    const { values, store } = this.props;
     return (
       <div>
         <Input displayText={displayText} change={this.handleChange}/>
-        <Button clicked={this.handleClick}/>
-        <span>{values}</span>
+        <Button clicked={this.handleUpdate}/>
+        <span onClick={() => {
+            store.dispatch({ type: actionTypes.REMOVING_TEXT })
+          }}>{values}</span>
       </div>
     );
   }
