@@ -6,7 +6,7 @@ const DisplayList = ({ items, remove }) => {
         <div>
             {items.map((item, index) => {
                 return (
-                    <DisplayItem key={index} text={item.text} removal={()=> remove(index)} items={items} />
+                    <DisplayItem key={index} text={item.text} removal={()=> remove(index)}/>
                 )
             })}
         </div>

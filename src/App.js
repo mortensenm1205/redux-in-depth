@@ -17,18 +17,19 @@ class App extends Component {
   handleUpdate = () => {
       const { displayText } = this.state;
       const { store } = this.props;
+      let ID = `00${new Date().getMilliseconds() + 1}`
       this.setState({ displayText: "" })
-      store.dispatch({ type: actionTypes.ADDING_TEXT, text: displayText, id: 0})
+      store.dispatch({ type: actionTypes.ADDING_TEXT, text: displayText, id: ID})
   }
 
   handleRemoval = index => {
       const { store } = this.props;
-      store.dispatch({ type: actionTypes.REMOVING_TEXT, id: index })
+      store.dispatch({ type: actionTypes.REMOVING_TEXT, index })
     };
 
   render() {
     const { displayText } = this.state;
-    const { items, store } = this.props;
+    const { items } = this.props;
     return (
       <div>
         <Input displayText={displayText} change={this.handleChange}/>
@@ -36,7 +37,6 @@ class App extends Component {
         <Button clicked={this.handleUpdate}/>
         {' '}
         <Display items={items} remove={this.handleRemoval} />
-        {console.log(store.getState())}
       </div>
     );
   }
