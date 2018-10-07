@@ -30,7 +30,7 @@ class App extends Component {
 
   render() {
     const { displayText } = this.state;
-    const { items, store } = this.props;
+    const { items } = this.props;
     return (
       <div>
         <Input displayText={displayText} change={this.handleChange}/>
