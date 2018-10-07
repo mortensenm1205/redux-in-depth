@@ -3,8 +3,7 @@ import { connect }from 'react-redux';
 import Input from './components/Input';
 import Button from './components/Button';
 import Display from './components/Display/DisplayList';
-import * as actionTypes from './actions/types';
-let ID = 0;
+import { addingText, removingText } from './actions';
 
 class App extends Component {
 
@@ -21,7 +20,7 @@ class App extends Component {
       const { displayText } = this.state;
       const { addingText } = this.props;
       this.setState({ displayText: "" });
-      addingText(displayText, ID++);
+      addingText(displayText);
   }
 
   handleRemoval = index => {
@@ -31,7 +30,7 @@ class App extends Component {
 
   render() {
     const { displayText } = this.state;
-    const { items } = this.props;
+    const { items, store } = this.props;
     return (
       <div>
         <Input displayText={displayText} change={this.handleChange}/>
@@ -52,8 +51,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return{
-    addingText: (displayText, ID) => dispatch({ type: actionTypes.ADDING_TEXT, text: displayText, id: ID}),
-    removeText: (index) => dispatch({ type: actionTypes.REMOVING_TEXT, index })
+    addingText: (displayText) => dispatch(addingText(displayText)),
+    removeText: (index) => dispatch(removingText(index))
   }
 };
 
