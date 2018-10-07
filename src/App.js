@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import { connect }from 'react-redux';
 import Input from './components/Input';
 import Button from './components/Button';
 import Display from './components/Display/DisplayList';
 import * as actionTypes from './actions/types';
+let ID = 0;
 
 class App extends Component {
 
@@ -10,21 +12,21 @@ class App extends Component {
     displayText: ""
   }
 
+
   handleChange = e => {
       this.setState({ displayText: e.target.value })
   }
 
   handleUpdate = () => {
       const { displayText } = this.state;
-      const { store } = this.props;
-      let ID = `00${new Date().getMilliseconds() + 1}`
-      this.setState({ displayText: "" })
-      store.dispatch({ type: actionTypes.ADDING_TEXT, text: displayText, id: ID})
+      const { addingText } = this.props;
+      this.setState({ displayText: "" });
+      addingText(displayText, ID++);
   }
 
   handleRemoval = index => {
-      const { store } = this.props;
-      store.dispatch({ type: actionTypes.REMOVING_TEXT, index })
+      const { removeText } = this.props;
+      removeText(index);
     };
 
   render() {
@@ -42,4 +44,17 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    items: state.text
+  }
+};
+
+const mapDispatchToProps = dispatch => {
+  return{
+    addingText: (displayText, ID) => dispatch({ type: actionTypes.ADDING_TEXT, text: displayText, id: ID}),
+    removeText: (index) => dispatch({ type: actionTypes.REMOVING_TEXT, index })
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

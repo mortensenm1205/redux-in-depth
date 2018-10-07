@@ -1,15 +1,16 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import { mainReducer } from './reducers';
 import App from './App';
 
-export const store = createStore(mainReducer);
-const render = () => {
-  ReactDOM.render(
-    <App items={store.getState().text} store={store} />,
-    document.getElementById('root')
-  )
-};
-store.subscribe(render);
-render();
+const store = createStore(mainReducer);
+
+render(
+  <Provider store={store}>
+   <App />
+  </Provider>,
+  document.getElementById('root')
+)
+
